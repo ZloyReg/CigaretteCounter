@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.volynsky.vladyslav.cigarettecounter.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/NormPerDayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:text="Выберите дневную норму сигарет:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:visibility="visible"
+            tools:text="Выберите дневную норму сигарет:" />
+
+        <Button
+            android:id="@+id/MinusB"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/NormPerDayText"
+            android:layout_below="@+id/NormPerDayText"
+            android:text="-"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"
+            android:visibility="visible"
+            tools:text="-" />
+
+        <TextView
+            android:id="@+id/NormPerDayValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/PlusB"
+            android:layout_alignBottom="@+id/PlusB"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_toEndOf="@+id/MinusB"
+            android:text="0"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:visibility="visible"
+            tools:text="0" />
+
+        <Button
+            android:id="@+id/PlusB"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/NormPerDayText"
+            android:layout_toEndOf="@+id/NormPerDayValue"
+            android:text="+"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"
+            android:visibility="visible"
+            tools:text="+" />
+
+        <TextView
+            android:id="@+id/SmokedForTodayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/MinusB"
+            android:layout_below="@+id/MinusB"
+            android:layout_marginTop="34dp"
+            android:text="Выкуренно за сегодня:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:visibility="visible"
+            tools:text="Выкуренно за сегодня:" />
+
+        <TextView
+            android:id="@+id/AvailableForTodayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/SmokedForTodayText"
+            android:layout_below="@+id/SmokedForTodayText"
+            android:layout_marginTop="26dp"
+            android:text="Можно выкурить за сегодня:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:visibility="visible"
+            tools:text="Можно выкурить за сегодня:" />
+
+        <TextView
+            android:id="@+id/LastSmokeTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/AvailableForTodayText"
+            android:layout_below="@+id/AvailableForTodayText"
+            android:layout_marginTop="32dp"
+            android:text="Со времени последнего перекура прошло:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            tools:text="Со времени последнего перекура прошло:" />
+
+        <Chronometer
+            android:id="@+id/LastSmokeTimeChro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LastSmokeTimeText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        <Button
+            android:id="@+id/SmokeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LastSmokeTimeChro"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="57dp"
+            android:text="Курнуть!"
+            android:visibility="visible"
+            tools:text="Курнуть!" />
+
+        <Button
+            android:id="@+id/FreezeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/UnFreezeButton"
+            android:layout_alignBottom="@+id/UnFreezeButton"
+            android:layout_alignStart="@+id/UnFreezeButton"
+            android:text="Заморозить норму" />
+
+        <Button
+            android:id="@+id/UnFreezeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/NormPerDayText"
+            android:layout_toEndOf="@+id/PlusB"
+            android:text="Разморозить норму"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/ResetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SmokeButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:text="Сброс счетчиков"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
