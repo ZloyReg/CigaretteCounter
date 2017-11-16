@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/LastSmokeTimeText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="48dp"
             android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <Button
@@ -131,7 +131,7 @@
             android:layout_alignBaseline="@+id/UnFreezeButton"
             android:layout_alignBottom="@+id/UnFreezeButton"
             android:layout_alignStart="@+id/UnFreezeButton"
-            android:text="Заморозить норму" />
+            android:text="Зафиксировать норму" />
 
         <Button
             android:id="@+id/UnFreezeButton"
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/NormPerDayText"
             android:layout_toEndOf="@+id/PlusB"
-            android:text="Разморозить норму"
+            android:text="Изменить норму"
             android:visibility="invisible" />
 
         <Button
