@@ -1,6 +1,5 @@
 package com.volynsky.vladyslav.cigarettecounter;
 
-import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,71 +58,101 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         resetButton.setOnClickListener(this);
     }
 
+    public void plusClicked (){
+        norm++;
+        normPerDayValue.setText(String.valueOf(norm));
+        minusB.setEnabled(true);
+        freezeB.setEnabled(true);
+        if (norm == 40) {
+            plusB.setEnabled(false);
+        }
+    }
+
+    public void minusClicked (){
+        norm--;
+        normPerDayValue.setText(String.valueOf(norm));
+        plusB.setEnabled(true);
+        if (norm < 1) {
+            minusB.setEnabled(false);
+            freezeB.setEnabled(false);
+            smokeButton.setEnabled(false);
+        }
+    }
+
+    public void freezeClicked (){
+        smokeButton.setEnabled(true);
+        resetButton.setEnabled(true);
+        availableToday = norm;
+        availableForTodayText.setText(R.string.availableTodayText);
+        availableForTodayText.append(String.valueOf(availableToday));
+        smokedForTodayText.setText(R.string.smokedTodayText);
+        smokedForTodayText.append(String.valueOf(smokedToday));
+        minusB.setEnabled(false);
+        plusB.setEnabled(false);
+        freezeB.setEnabled(false);
+        unfreezeB.setVisibility(View.VISIBLE);
+        unfreezeB.setEnabled(true);
+        availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+        freezeB.setVisibility(View.INVISIBLE);
+        freezeB.setEnabled(false);
+    }
+
+    public void unfreezeClicked (){
+        minusB.setEnabled(true);
+        plusB.setEnabled(true);
+        freezeB.setEnabled(true);
+        freezeB.setVisibility(View.VISIBLE);
+        freezeB.setEnabled(true);
+        unfreezeB.setVisibility(View.INVISIBLE);
+        unfreezeB.setEnabled(false);
+    }
+
+    public void smokeClicked (){
+        lastSmokeTimeChro.setBase(SystemClock.elapsedRealtime());
+        availableToday--;
+        smokedToday++;
+        availableForTodayText.setText(R.string.availableTodayText);
+        availableForTodayText.append(String.valueOf(availableToday));
+        smokedForTodayText.setText(R.string.smokedTodayText);
+        smokedForTodayText.append(String.valueOf(smokedToday));
+        if (availableToday < 0){
+            availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableBad));
+        }
+        else{
+            availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+        }
+        lastSmokeTimeChro.start();
+    }
+
+    public void resetClicked (){
+        availableToday = norm;
+        smokedToday = 0;
+        availableForTodayText.setText(R.string.availableTodayText);
+        availableForTodayText.append(String.valueOf(availableToday));
+        smokedForTodayText.setText(R.string.smokedTodayText);
+        smokedForTodayText.append(String.valueOf(smokedToday));
+        availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+    }
+
     public void onClick(View v){
             switch (v.getId()){
                 case R.id.PlusB:
-                    norm++;
-                    normPerDayValue.setText(Integer.toString(norm));
-                    minusB.setEnabled(true);
-                    freezeB.setEnabled(true);
-                    if (norm == 40) {
-                        plusB.setEnabled(false);
-                    }
+                    plusClicked ();
                     break;
                 case R.id.MinusB:
-                norm--;
-                normPerDayValue.setText(Integer.toString(norm));
-                plusB.setEnabled(true);
-                if (norm < 1){
-                    minusB.setEnabled(false);
-                    freezeB.setEnabled(false);
-                    smokeButton.setEnabled(false);
-                }
+                    minusClicked ();
                     break;
                 case R.id.FreezeButton:
-                    smokeButton.setEnabled(true);
-                    resetButton.setEnabled(true);
-                    availableToday = norm;
-                    availableForTodayText.setText("Можно выкурить за сегодня: "+Integer.toString(availableToday));
-                    smokedForTodayText.setText("Выкуренно за сегодня: "+Integer.toString(smokedToday));
-                    minusB.setEnabled(false);
-                    plusB.setEnabled(false);
-                    freezeB.setEnabled(false);
-                    unfreezeB.setVisibility(View.VISIBLE);
-                    unfreezeB.setEnabled(true);
-                    availableForTodayText.setTextColor(Color.BLACK);
-                    freezeB.setVisibility(View.INVISIBLE);
-                    freezeB.setEnabled(false);
+                    freezeClicked();
                     break;
                 case R.id.UnFreezeButton:
-                    minusB.setEnabled(true);
-                    plusB.setEnabled(true);
-                    freezeB.setEnabled(true);
-                    freezeB.setVisibility(View.VISIBLE);
-                    freezeB.setEnabled(true);
-                    unfreezeB.setVisibility(View.INVISIBLE);
-                    unfreezeB.setEnabled(false);
+                    unfreezeClicked();
                     break;
                 case R.id.SmokeButton:
-                    lastSmokeTimeChro.setBase(SystemClock.elapsedRealtime());
-                    availableToday--;
-                    smokedToday++;
-                    availableForTodayText.setText("Можно выкурить за сегодня: "+Integer.toString(availableToday));
-                    smokedForTodayText.setText("Выкуренно за сегодня: "+Integer.toString(smokedToday));
-                    if (availableToday < 0){
-                        availableForTodayText.setTextColor(Color.RED);
-                    }
-                    else{
-                        availableForTodayText.setTextColor(Color.BLACK);
-                    }
-                    lastSmokeTimeChro.start();
+                    smokeClicked();
                     break;
                 case R.id.ResetButton:
-                    availableToday = norm;
-                    smokedToday = 0;
-                    availableForTodayText.setText("Можно выкурить за сегодня: "+Integer.toString(availableToday));
-                    smokedForTodayText.setText("Выкуренно за сегодня: "+Integer.toString(smokedToday));
-                    availableForTodayText.setTextColor(Color.BLACK);
+                    resetClicked();
                     break;
             }
     }

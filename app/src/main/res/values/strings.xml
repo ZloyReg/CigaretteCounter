@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CigaretteCounter</string>
+    <string name="availableTodayText">Можно выкурить за сегодня:\u0020</string>
+    <string name="smokedTodayText">Выкуренно за сегодня:\u0020</string>
 </resources>
