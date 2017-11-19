@@ -9,6 +9,7 @@
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/smokingdepp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,10 +27,10 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="22dp"
-            android:text="Выберите дневную норму сигарет:"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:visibility="visible"
-            tools:text="Выберите дневную норму сигарет:" />
+            android:text="Задайте дневную норму сигарет:"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@android:color/holo_orange_dark"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/MinusB"
@@ -38,10 +39,12 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/NormPerDayText"
             android:layout_below="@+id/NormPerDayText"
+            android:background="@android:color/transparent"
             android:text="-"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"
-            android:visibility="visible"
-            tools:text="-" />
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/colorAvailableNorm"
+            android:textSize="36sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/NormPerDayValue"
@@ -54,8 +57,10 @@
             android:layout_toEndOf="@+id/MinusB"
             android:text="0"
             android:textAppearance="@android:style/TextAppearance.Holo.Large"
-            android:visibility="visible"
-            tools:text="0" />
+            android:textColor="@color/colorButtonText"
+            android:textSize="30sp"
+            android:background="@color/colorButton"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/PlusB"
@@ -64,10 +69,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/NormPerDayText"
             android:layout_toEndOf="@+id/NormPerDayValue"
+            android:background="@android:color/transparent"
             android:text="+"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"
-            android:visibility="visible"
-            tools:text="+" />
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/colorAvailableBad"
+            android:textSize="36sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/SmokedForTodayText"
@@ -77,9 +84,10 @@
             android:layout_below="@+id/MinusB"
             android:layout_marginTop="34dp"
             android:text="Выкуренно за сегодня:"
-            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@android:color/holo_orange_dark"
             android:visibility="visible"
-            tools:text="Выкуренно за сегодня:" />
+            android:background="@color/colorButton" />
 
         <TextView
             android:id="@+id/AvailableForTodayText"
@@ -89,9 +97,10 @@
             android:layout_below="@+id/SmokedForTodayText"
             android:layout_marginTop="26dp"
             android:text="Можно выкурить за сегодня:"
-            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/colorAvailableNorm"
             android:visibility="visible"
-            tools:text="Можно выкурить за сегодня:" />
+            android:background="@color/colorButton" />
 
         <TextView
             android:id="@+id/LastSmokeTimeText"
@@ -101,55 +110,74 @@
             android:layout_below="@+id/AvailableForTodayText"
             android:layout_marginTop="32dp"
             android:text="Со времени последнего перекура прошло:"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            tools:text="Со времени последнего перекура прошло:" />
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@android:color/holo_orange_dark"
+            android:background="@color/colorButton" />
 
         <Chronometer
             android:id="@+id/LastSmokeTimeChro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LastSmokeTimeText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="48dp"
-            android:textAppearance="@style/TextAppearance.AppCompat" />
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="100dp"
+            android:layout_toEndOf="@+id/PlusB"
+            android:textAppearance="@android:style/TextAppearance.Holo.Large"
+            android:textColor="@color/colorAvailableNorm" />
 
         <Button
             android:id="@+id/SmokeButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LastSmokeTimeChro"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="45dp"
+            android:background="@color/colorButton"
             android:text="Курнуть!"
-            android:visibility="visible"
-            tools:text="Курнуть!" />
+            android:textColor="@color/colorButtonText"
+            android:textSize="16sp"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/FreezeButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/UnFreezeButton"
             android:layout_alignBottom="@+id/UnFreezeButton"
             android:layout_alignStart="@+id/UnFreezeButton"
-            android:text="Зафиксировать норму" />
+            android:background="@color/colorButton"
+            android:text="Зафиксировать"
+            android:textColor="@color/colorButtonText"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/UnFreezeButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/NormPerDayText"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/PlusB"
-            android:text="Изменить норму"
+            android:background="@color/colorButton"
+            android:textColor="@color/colorButtonText"
+            android:text="Изменить"
+            android:textSize="16sp"
             android:visibility="invisible" />
 
         <Button
             android:id="@+id/ResetButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/SmokeButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
+            android:background="@color/colorButton"
             android:text="Сброс счетчиков"
+            android:textColor="@color/colorButtonText"
+            android:textSize="16sp"
             android:visibility="visible" />
 
     </RelativeLayout>

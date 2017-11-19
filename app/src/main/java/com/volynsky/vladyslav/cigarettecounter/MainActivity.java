@@ -46,10 +46,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     public void setDefaultScreen() {
         minusB.setEnabled(false);
+        minusB.setTextColor(getResources().getColor(R.color.colorDisabled));
         smokeButton.setEnabled(false);
+        smokeButton.setTextColor(getResources().getColor(R.color.colorDisabled));
         freezeB.setEnabled(false);
+        freezeB.setTextColor(getResources().getColor(R.color.colorDisabled));
         unfreezeB.setEnabled(false);
+        unfreezeB.setVisibility(View.INVISIBLE);
         resetButton.setEnabled(false);
+        resetButton.setTextColor(getResources().getColor(R.color.colorDisabled));
         plusB.setOnClickListener(this);
         minusB.setOnClickListener(this);
         freezeB.setOnClickListener(this);
@@ -62,9 +67,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         norm++;
         normPerDayValue.setText(String.valueOf(norm));
         minusB.setEnabled(true);
+        minusB.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
         freezeB.setEnabled(true);
+        freezeB.setTextColor(getResources().getColor(R.color.colorButtonText));
         if (norm == 40) {
             plusB.setEnabled(false);
+            plusB.setTextColor(getResources().getColor(R.color.colorDisabled));
         }
     }
 
@@ -72,26 +80,35 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         norm--;
         normPerDayValue.setText(String.valueOf(norm));
         plusB.setEnabled(true);
+        plusB.setTextColor(getResources().getColor(R.color.colorAvailableBad));
         if (norm < 1) {
             minusB.setEnabled(false);
+            minusB.setTextColor(getResources().getColor(R.color.colorDisabled));
             freezeB.setEnabled(false);
+            freezeB.setTextColor(getResources().getColor(R.color.colorDisabled));
             smokeButton.setEnabled(false);
+            smokeButton.setTextColor(getResources().getColor(R.color.colorDisabled));
         }
     }
 
     public void freezeClicked (){
         smokeButton.setEnabled(true);
+        smokeButton.setTextColor(getResources().getColor(R.color.colorButtonText));
         resetButton.setEnabled(true);
+        resetButton.setTextColor(getResources().getColor(R.color.colorButtonText));
         availableToday = norm;
         availableForTodayText.setText(R.string.availableTodayText);
         availableForTodayText.append(String.valueOf(availableToday));
         smokedForTodayText.setText(R.string.smokedTodayText);
         smokedForTodayText.append(String.valueOf(smokedToday));
         minusB.setEnabled(false);
+        minusB.setTextColor(getResources().getColor(R.color.colorDisabled));
         plusB.setEnabled(false);
+        plusB.setTextColor(getResources().getColor(R.color.colorDisabled));
         freezeB.setEnabled(false);
         unfreezeB.setVisibility(View.VISIBLE);
         unfreezeB.setEnabled(true);
+        unfreezeB.setTextColor(getResources().getColor(R.color.colorButtonText));
         availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
         freezeB.setVisibility(View.INVISIBLE);
         freezeB.setEnabled(false);
@@ -99,8 +116,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     public void unfreezeClicked (){
         minusB.setEnabled(true);
+        minusB.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
         plusB.setEnabled(true);
+        plusB.setTextColor(getResources().getColor(R.color.colorAvailableBad));
         freezeB.setEnabled(true);
+        freezeB.setTextColor(getResources().getColor(R.color.colorButtonText));
         freezeB.setVisibility(View.VISIBLE);
         freezeB.setEnabled(true);
         unfreezeB.setVisibility(View.INVISIBLE);
