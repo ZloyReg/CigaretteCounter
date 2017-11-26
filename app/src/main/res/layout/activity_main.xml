@@ -37,7 +37,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.72" />
 
     <Button
     android:id="@+id/ResetButton"
@@ -55,7 +55,7 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.90" />
+    app:layout_constraintVertical_bias="0.86" />
 
     <Button
         android:id="@+id/AboutButton"
@@ -65,7 +65,7 @@
         android:background="@color/colorButton"
         android:text="About"
         android:textColor="@color/colorButtonText"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +73,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintVertical_bias="0.98" />
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintVertical_bias="0.99" />
 
     <Chronometer
         android:id="@+id/LastSmokeTimeChro"
@@ -87,14 +87,14 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/SmokedForTodayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorButton"
-        android:text="Выкуренно за сегодня:"
+        android:text="@string/smokedTodayText"
         android:textAppearance="@android:style/TextAppearance"
         android:textColor="@android:color/holo_orange_dark"
         android:visibility="visible"
@@ -103,15 +103,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintVertical_bias="0.22" />
+
+    <TextView
+        android:id="@+id/SmokedForTodayValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="0"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large"
+        android:textColor="@color/colorAvailableNorm"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintVertical_bias="0.27" />
 
     <TextView
         android:id="@+id/AvailableForTodayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Можно выкурить за сегодня:"
+        android:text="@string/availableTodayText"
         android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@color/colorAvailableNorm"
+        android:textColor="@android:color/holo_orange_dark"
         android:visibility="visible"
         android:background="@color/colorButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -120,6 +136,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintVertical_bias="0.33"/>
+
+    <TextView
+        android:id="@+id/AvailableForTodayValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="0"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large"
+        android:textColor="@color/colorAvailableNorm"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
         android:id="@+id/LastSmokeTimeText"
@@ -134,7 +166,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.43"/>
+        app:layout_constraintVertical_bias="0.44"/>
 
     <LinearLayout
         android:id="@+id/secondtier"

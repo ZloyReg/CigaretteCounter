@@ -1,5 +1,6 @@
 package com.volynsky.vladyslav.cigarettecounter;
 
+import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +11,17 @@ import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
+
+
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     int norm, availableToday, smokedToday = 0;
+    long baseTime, prevTime = 0;
     TextView normPerDayValue;
-    TextView availableForTodayText;
-    TextView smokedForTodayText;
+    TextView availableForTodayValue;
+    TextView smokedForTodayValue;
     Button plusB;
     Button minusB;
     Button freezeB;
@@ -24,6 +30,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     Button resetButton;
     Button aboutButton;
     Chronometer lastSmokeTimeChro;
+    SharedPreferences savePref;
+    SharedPreferences.Editor editor;
+
+    final String SAVE_TIME = "Previous timer time: ";
+    final String SAVE_NORM = "Cigarett norm: ";
+    final String SAVE_SMOKED = "Smoked count: ";
+    final String SAVE_AVAILABLE = "Available count: ";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     public void initializeViews() {
         normPerDayValue = findViewById(R.id.NormPerDayValue);
-        availableForTodayText = findViewById(R.id.AvailableForTodayText);
-        smokedForTodayText = findViewById(R.id.SmokedForTodayText);
+        availableForTodayValue = findViewById(R.id.AvailableForTodayValue);
+        smokedForTodayValue = findViewById(R.id.SmokedForTodayValue);
         plusB = findViewById(R.id.PlusB);
         minusB = findViewById(R.id.MinusB);
         freezeB = findViewById(R.id.FreezeButton);
@@ -48,16 +62,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void setDefaultScreen() {
-        minusB.setEnabled(false);
-        minusB.setTextColor(getResources().getColor(R.color.colorDisabled));
-        smokeButton.setEnabled(false);
-        smokeButton.setTextColor(getResources().getColor(R.color.colorDisabled));
-        freezeB.setEnabled(false);
-        freezeB.setTextColor(getResources().getColor(R.color.colorDisabled));
+        buttonDisable(minusB);
+        buttonDisable(smokeButton);
+        buttonDisable(freezeB);
         unfreezeB.setEnabled(false);
         unfreezeB.setVisibility(View.INVISIBLE);
-        resetButton.setEnabled(false);
-        resetButton.setTextColor(getResources().getColor(R.color.colorDisabled));
+        buttonDisable(resetButton);
         plusB.setOnClickListener(this);
         minusB.setOnClickListener(this);
         freezeB.setOnClickListener(this);
@@ -65,6 +75,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         smokeButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
         aboutButton.setOnClickListener(this);
+        loadValue();
+        if (norm != 0){
+            setScreenAfterLoad();
+        }
+        loadTimer();
+    }
+
+    public void setScreenAfterLoad (){
+        buttonDisable(minusB);
+        buttonDisable(plusB);
+        freezeB.setVisibility(View.INVISIBLE);
+        freezeB.setEnabled(false);
+        buttonEnable(unfreezeB);
+        unfreezeB.setVisibility(View.VISIBLE);
+        buttonEnable(smokeButton);
+        buttonEnable(resetButton);
+
     }
 
     public void buttonDisable (Button button){
@@ -85,6 +112,25 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     public void buttonEnable (Button button){
         button.setEnabled(true);
         button.setTextColor(getResources().getColor(R.color.colorButtonText));
+    }
+
+    public void setColorNorm (TextView textView){
+        textView.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+    }
+
+    public void setColorBad (TextView textView){
+        textView.setTextColor(getResources().getColor(R.color.colorAvailableBad));
+    }
+
+    public void colorCondit (){
+        if (availableToday < 0){
+            setColorBad(availableForTodayValue);
+            setColorBad(smokedForTodayValue);
+        }
+        else{
+            setColorNorm(availableForTodayValue);
+            setColorNorm(smokedForTodayValue);
+        }
     }
 
     public void plusClicked (){
@@ -112,16 +158,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         buttonEnable(smokeButton);
         buttonEnable(resetButton);
         availableToday = norm;
-        availableForTodayText.setText(R.string.availableTodayText);
-        availableForTodayText.append(String.valueOf(availableToday));
-        smokedForTodayText.setText(R.string.smokedTodayText);
-        smokedForTodayText.append(String.valueOf(smokedToday));
+        availableForTodayValue.setText(String.valueOf(availableToday));
+        smokedForTodayValue.setText(String.valueOf(smokedToday));
         buttonDisable(minusB);
         buttonDisable(plusB);
         freezeB.setEnabled(false);
         buttonEnable(unfreezeB);
         unfreezeB.setVisibility(View.VISIBLE);
-        availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+        setColorNorm(availableForTodayValue);
+        setColorNorm(smokedForTodayValue);
         freezeB.setVisibility(View.INVISIBLE);
         freezeB.setEnabled(false);
     }
@@ -136,20 +181,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void smokeClicked (){
-        lastSmokeTimeChro.setBase(SystemClock.elapsedRealtime());
         availableToday--;
         smokedToday++;
-        availableForTodayText.setText(R.string.availableTodayText);
-        availableForTodayText.append(String.valueOf(availableToday));
-        smokedForTodayText.setText(R.string.smokedTodayText);
-        smokedForTodayText.append(String.valueOf(smokedToday));
-        if (availableToday < 0){
-            availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableBad));
-        }
-        else{
-            availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
-        }
+        availableForTodayValue.setText(String.valueOf(availableToday));
+        smokedForTodayValue.setText(String.valueOf(smokedToday));
+        colorCondit();
+        lastSmokeTimeChro.setBase(SystemClock.elapsedRealtime());
         lastSmokeTimeChro.start();
+        saveTimer();
     }
 
     public void aboutClicked () {
@@ -159,11 +198,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     public void resetClicked (){
         availableToday = norm;
         smokedToday = 0;
-        availableForTodayText.setText(R.string.availableTodayText);
-        availableForTodayText.append(String.valueOf(availableToday));
-        smokedForTodayText.setText(R.string.smokedTodayText);
-        smokedForTodayText.append(String.valueOf(smokedToday));
-        availableForTodayText.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+        availableForTodayValue.setText(String.valueOf(availableToday));
+        smokedForTodayValue.setText(String.valueOf(smokedToday));
+        setColorNorm(availableForTodayValue);
+        setColorNorm(smokedForTodayValue);
     }
 
     public void onClick(View v){
@@ -191,5 +229,48 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     break;
             }
     }
+    public void saveTimer (){
+        savePref = getPreferences(MODE_PRIVATE);
+        editor = savePref.edit();
+        editor.putLong(SAVE_TIME, Calendar.getInstance().getTimeInMillis());
+        editor.apply();
+    }
+
+    public void loadTimer (){
+        savePref = getPreferences(MODE_PRIVATE);
+        prevTime = savePref.getLong(SAVE_TIME, 0);
+        if (prevTime != 0){
+            baseTime = prevTime - Calendar.getInstance().getTimeInMillis() + SystemClock.elapsedRealtime();
+            lastSmokeTimeChro.setBase(baseTime);
+            lastSmokeTimeChro.start();
+        }
+    }
+
+    public void saveValue (){
+        savePref = getPreferences(MODE_PRIVATE);
+        editor = savePref.edit();
+        editor.putInt(SAVE_NORM, norm);
+        editor.putInt(SAVE_SMOKED, smokedToday);
+        editor.putInt(SAVE_AVAILABLE, availableToday);
+        editor.apply();
+    }
+
+    public void loadValue () {
+        savePref = getPreferences(MODE_PRIVATE);
+        norm = savePref.getInt(SAVE_NORM,0);
+        smokedToday = savePref.getInt(SAVE_SMOKED,0);
+        availableToday = savePref.getInt(SAVE_AVAILABLE,0);
+        normPerDayValue.setText(String.valueOf(norm));
+        availableForTodayValue.setText(String.valueOf(availableToday));
+        smokedForTodayValue.setText(String.valueOf(smokedToday));
+        colorCondit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveValue();
+    }
+
 }
 
