@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/smokingdepp">
+
+    <TextView
+    android:id="@+id/NormPerDayText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorButton"
+    android:text="Задайте дневную норму сигарет:"
+    android:textAppearance="@android:style/TextAppearance"
+    android:textColor="@android:color/holo_orange_dark"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintHorizontal_bias="0.02"
+    app:layout_constraintVertical_bias="0.03"/>
+
+    <LinearLayout
+        android:id="@+id/secondtier"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.11">
+
+        <RelativeLayout
+            android:id="@+id/secondRelat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/MinusB"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/colorButton"
+                android:text="-"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/NormPerDayValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/PlusB"
+                android:layout_alignBottom="@+id/PlusB"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/MinusB"
+                android:background="@color/colorButton"
+                android:text="0"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/PlusB"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/MinusB"
+                android:layout_toEndOf="@+id/NormPerDayValue"
+                android:background="@color/colorButton"
+                android:text="+"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/CigarettPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="Стоимость пачки сигарет (грн/коп):"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textColor="@android:color/holo_orange_dark"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintVertical_bias="0.23"/>
+
+    <LinearLayout
+        android:id="@+id/thirdtier"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31">
+
+        <RelativeLayout
+            android:id="@+id/thirdRelat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/MinusB1"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/colorButton"
+                android:text="-"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/CigarettPriceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/PlusB1"
+                android:layout_alignBottom="@+id/PlusB1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/MinusB1"
+                android:background="@color/colorButton"
+                android:text="0 грн"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/PlusB1"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/MinusB1"
+                android:layout_toEndOf="@+id/CigarettPriceValue"
+                android:background="@color/colorButton"
+                android:text="+"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/forthtier"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45">
+
+        <RelativeLayout
+            android:id="@+id/forthRelat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/MinusB2"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/colorButton"
+                android:text="-"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/CigarettPriceCentValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/PlusB2"
+                android:layout_alignBottom="@+id/PlusB2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/MinusB2"
+                android:background="@color/colorButton"
+                android:text="0 коп"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/PlusB2"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/MinusB2"
+                android:layout_toEndOf="@+id/CigarettPriceCentValue"
+                android:background="@color/colorButton"
+                android:text="+"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/NicotineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorButton"
+            android:text="Cодержание никотина в 1 сигарете(мг):"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@android:color/holo_orange_dark"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintVertical_bias="0.55"/>
+
+        <LinearLayout
+            android:id="@+id/fifthtier"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65">
+
+            <RelativeLayout
+                android:id="@+id/fifthRelat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/MinusB3"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorButton"
+                    android:text="-"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                    android:textColor="@color/colorButtonText"
+                    android:textSize="36sp"
+                    android:visibility="visible"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <TextView
+                    android:id="@+id/NicotineValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/PlusB3"
+                    android:layout_alignBottom="@+id/PlusB3"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@+id/MinusB3"
+                    android:background="@color/colorButton"
+                    android:text="0.0"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                    android:textColor="@color/colorButtonText"
+                    android:textSize="30sp"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/PlusB3"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/MinusB3"
+                    android:layout_toEndOf="@+id/NicotineValue"
+                    android:background="@color/colorButton"
+                    android:text="+"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                    android:textColor="@color/colorButtonText"
+                    android:textSize="36sp"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/TarText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="Cодержание смол в 1 сигарете(мг):"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textColor="@android:color/holo_orange_dark"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintVertical_bias="0.75"/>
+
+    <LinearLayout
+        android:id="@+id/sixthtier"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85">
+
+        <RelativeLayout
+            android:id="@+id/sixthRelat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/MinusB4"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@color/colorButton"
+                android:text="-"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/TarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/PlusB4"
+                android:layout_alignBottom="@+id/PlusB4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toEndOf="@+id/MinusB4"
+                android:background="@color/colorButton"
+                android:text="0"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/PlusB4"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/MinusB4"
+                android:layout_toEndOf="@+id/TarValue"
+                android:background="@color/colorButton"
+                android:text="+"
+                android:textAppearance="@android:style/TextAppearance.Holo.Large"
+                android:textColor="@color/colorButtonText"
+                android:textSize="36sp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/SaveButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="Сохранить"
+        android:textColor="@color/colorButtonText"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <Button
+        android:id="@+id/BackButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="Вернуться"
+        android:textColor="@color/colorButtonText"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintVertical_bias="0.98" />
+
+</android.support.constraint.ConstraintLayout>

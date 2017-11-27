@@ -2,24 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/smokingdepp">
-
-    <TextView
-        android:id="@+id/NormPerDayText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Задайте дневную норму сигарет:"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@android:color/holo_orange_dark"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.03"/>
 
     <Button
         android:id="@+id/SmokeButton"
@@ -37,7 +23,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <Button
     android:id="@+id/ResetButton"
@@ -55,15 +41,69 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.86" />
+    app:layout_constraintVertical_bias="0.84" />
+
+    <CheckBox
+        android:id="@+id/NewDayCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Новый день"
+        android:textColor="@color/colorButtonText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.92" />
 
     <Button
-        android:id="@+id/AboutButton"
+    android:id="@+id/AboutButton"
+    style="@style/Widget.AppCompat.Button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorButton"
+    android:text="About"
+    android:textColor="@color/colorButtonText"
+    android:textSize="16sp"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintHorizontal_bias="0.99"
+    app:layout_constraintVertical_bias="0.99" />
+
+    <Button
+        android:id="@+id/StatButton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorButton"
-        android:text="About"
+        android:text="Статистика"
+        android:textColor="@color/colorButtonText"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <Button
+        android:id="@+id/SetupButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="Настройки"
         android:textColor="@color/colorButtonText"
         android:textSize="16sp"
         android:visibility="visible"
@@ -74,7 +114,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintVertical_bias="0.99" />
+        app:layout_constraintVertical_bias="0.01" />
 
     <Chronometer
         android:id="@+id/LastSmokeTimeChro"
@@ -87,7 +127,7 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <TextView
         android:id="@+id/SmokedForTodayText"
@@ -103,7 +143,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.22" />
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/SmokedForTodayValue"
@@ -119,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/AvailableForTodayText"
@@ -135,7 +175,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.33"/>
+        app:layout_constraintVertical_bias="0.14"/>
 
     <TextView
         android:id="@+id/AvailableForTodayValue"
@@ -151,7 +191,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/LastSmokeTimeText"
@@ -166,100 +206,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintVertical_bias="0.44"/>
-
-    <LinearLayout
-        android:id="@+id/secondtier"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11">
-
-        <RelativeLayout
-            android:id="@+id/secondRelat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/MinusB"
-                style="@style/Widget.AppCompat.Button.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@android:color/transparent"
-                android:text="-"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:textColor="@color/colorAvailableNorm"
-                android:textSize="36sp"
-                android:visibility="visible"
-                app:layout_constraintLeft_toLeftOf="parent" />
-
-            <TextView
-                android:id="@+id/NormPerDayValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/PlusB"
-                android:layout_alignBottom="@+id/PlusB"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/MinusB"
-                android:background="@color/colorButton"
-                android:text="0"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:textColor="@color/colorButtonText"
-                android:textSize="30sp"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/PlusB"
-                style="@style/Widget.AppCompat.Button.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/MinusB"
-                android:layout_toEndOf="@+id/NormPerDayValue"
-                android:background="@android:color/transparent"
-                android:text="+"
-                android:textAppearance="@android:style/TextAppearance.Holo.Large"
-                android:textColor="@color/colorAvailableBad"
-                android:textSize="36sp"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/FreezeButton"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/MinusB"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/PlusB"
-                android:background="@color/colorButton"
-                android:text="Зафиксировать"
-                android:textColor="@color/colorButtonText"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/UnFreezeButton"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/MinusB"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/PlusB"
-                android:background="@color/colorButton"
-                android:textColor="@color/colorButtonText"
-                android:text="Изменить"
-                android:textSize="16sp"
-                android:visibility="invisible" />
-        </RelativeLayout>
-
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.26"/>
 
 </android.support.constraint.ConstraintLayout>

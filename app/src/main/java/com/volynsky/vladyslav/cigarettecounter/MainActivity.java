@@ -1,5 +1,6 @@
 package com.volynsky.vladyslav.cigarettecounter;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,26 +19,43 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
 
-    int norm, availableToday, smokedToday = 0;
+    int setupnorm, availableToday, smokedToday, flag = 0;
+    int allSmoked, tarGained, alltar = 0;
+    int daysSmoked = 1;
+    float moneySpent, nicotineGained, allnicotine, price, percentNorm, averagePercent, grn, cent = 0;
     long baseTime, prevTime = 0;
-    TextView normPerDayValue;
+
     TextView availableForTodayValue;
     TextView smokedForTodayValue;
-    Button plusB;
-    Button minusB;
-    Button freezeB;
-    Button unfreezeB;
+
     Button smokeButton;
     Button resetButton;
     Button aboutButton;
+    Button statisticsButton;
+    Button setupButton;
+
+    CheckBox newDayCheckBox;
+
     Chronometer lastSmokeTimeChro;
+
     SharedPreferences savePref;
     SharedPreferences.Editor editor;
 
     final String SAVE_TIME = "Previous timer time: ";
-    final String SAVE_NORM = "Cigarett norm: ";
     final String SAVE_SMOKED = "Smoked count: ";
     final String SAVE_AVAILABLE = "Available count: ";
+    final String SAVE_NORM = "Cigarett norm: ";
+    final String SAVE_FLAG = "Setup is changed";
+    final String SAVE_AllSMOKED = "The count of all the smoked cigarettes";
+    final String SAVE_PRICEG = "Cigarett priceG: ";
+    final String SAVE_PRICEC = "Cigarett priceC: ";
+    final String SAVE_NICOTINE = "Cigarett nicotine: ";
+    final String SAVE_TAR = "Cigarett tar: ";
+    final String SAVE_DAYSSMOKED = "Days count";
+    final String SAVE_MONEYSPENT = "Money spent on cigarettes";
+    final String SAVE_PERCENT = "Percent of norm smoked";
+    final String SAVE_ALLNICOTINE = "Nicotine amount";
+    final String SAVE_ALLTAR = "Tar amount";
 
 
     @Override
@@ -48,65 +67,50 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void initializeViews() {
-        normPerDayValue = findViewById(R.id.NormPerDayValue);
         availableForTodayValue = findViewById(R.id.AvailableForTodayValue);
         smokedForTodayValue = findViewById(R.id.SmokedForTodayValue);
-        plusB = findViewById(R.id.PlusB);
-        minusB = findViewById(R.id.MinusB);
-        freezeB = findViewById(R.id.FreezeButton);
-        unfreezeB = findViewById(R.id.UnFreezeButton);
         smokeButton = findViewById(R.id.SmokeButton);
         resetButton = findViewById(R.id.ResetButton);
         lastSmokeTimeChro = findViewById(R.id.LastSmokeTimeChro);
         aboutButton = findViewById(R.id.AboutButton);
+        statisticsButton = findViewById(R.id.StatButton);
+        newDayCheckBox = findViewById(R.id.NewDayCheckBox);
+        setupButton = findViewById(R.id.SetupButton);
     }
 
     public void setDefaultScreen() {
-        buttonDisable(minusB);
         buttonDisable(smokeButton);
-        buttonDisable(freezeB);
-        unfreezeB.setEnabled(false);
-        unfreezeB.setVisibility(View.INVISIBLE);
         buttonDisable(resetButton);
-        plusB.setOnClickListener(this);
-        minusB.setOnClickListener(this);
-        freezeB.setOnClickListener(this);
-        unfreezeB.setOnClickListener(this);
         smokeButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
         aboutButton.setOnClickListener(this);
+        statisticsButton.setOnClickListener(this);
+        setupButton.setOnClickListener(this);
         loadValue();
-        if (norm != 0){
+        if (setupnorm != 0){
             setScreenAfterLoad();
         }
         loadTimer();
     }
 
     public void setScreenAfterLoad (){
-        buttonDisable(minusB);
-        buttonDisable(plusB);
-        freezeB.setVisibility(View.INVISIBLE);
-        freezeB.setEnabled(false);
-        buttonEnable(unfreezeB);
-        unfreezeB.setVisibility(View.VISIBLE);
         buttonEnable(smokeButton);
         buttonEnable(resetButton);
-
+        if (flag == 1){
+            availableToday = setupnorm;
+            availableForTodayValue.setText(String.valueOf(availableToday));
+            savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
+            editor = savePref.edit();
+            flag = 0;
+            editor.putInt(SAVE_FLAG, flag);
+            editor.apply();
+            colorCondit();
+        }
     }
 
     public void buttonDisable (Button button){
         button.setEnabled(false);
         button.setTextColor(getResources().getColor(R.color.colorDisabled));
-    }
-
-    public void minusButtonEnable (Button button){
-        button.setEnabled(true);
-        button.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
-    }
-
-    public void plusButtonEnable (Button button){
-        button.setEnabled(true);
-        button.setTextColor(getResources().getColor(R.color.colorAvailableBad));
     }
 
     public void buttonEnable (Button button){
@@ -133,56 +137,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    public void plusClicked (){
-        norm++;
-        normPerDayValue.setText(String.valueOf(norm));
-        minusButtonEnable(minusB);
-        buttonEnable(freezeB);
-        if (norm == 40) {
-            buttonDisable(plusB);
-        }
-    }
-
-    public void minusClicked (){
-        norm--;
-        normPerDayValue.setText(String.valueOf(norm));
-        plusButtonEnable(plusB);
-        if (norm < 1) {
-            buttonDisable(minusB);
-            buttonDisable(freezeB);
-            buttonDisable(smokeButton);
-        }
-    }
-
-    public void freezeClicked (){
-        buttonEnable(smokeButton);
-        buttonEnable(resetButton);
-        availableToday = norm;
-        availableForTodayValue.setText(String.valueOf(availableToday));
-        smokedForTodayValue.setText(String.valueOf(smokedToday));
-        buttonDisable(minusB);
-        buttonDisable(plusB);
-        freezeB.setEnabled(false);
-        buttonEnable(unfreezeB);
-        unfreezeB.setVisibility(View.VISIBLE);
-        setColorNorm(availableForTodayValue);
-        setColorNorm(smokedForTodayValue);
-        freezeB.setVisibility(View.INVISIBLE);
-        freezeB.setEnabled(false);
-    }
-
-    public void unfreezeClicked (){
-        minusButtonEnable(minusB);
-        plusButtonEnable(plusB);
-        buttonEnable(freezeB);
-        freezeB.setVisibility(View.VISIBLE);
-        unfreezeB.setVisibility(View.INVISIBLE);
-        unfreezeB.setEnabled(false);
-    }
-
     public void smokeClicked (){
         availableToday--;
         smokedToday++;
+        allSmoked++;
+        alltar = alltar + tarGained;
+        allnicotine = allnicotine + nicotineGained;
+        moneySpent = moneySpent+price;
         availableForTodayValue.setText(String.valueOf(availableToday));
         smokedForTodayValue.setText(String.valueOf(smokedToday));
         colorCondit();
@@ -196,28 +157,32 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void resetClicked (){
-        availableToday = norm;
-        smokedToday = 0;
+        availableToday = setupnorm;
         availableForTodayValue.setText(String.valueOf(availableToday));
-        smokedForTodayValue.setText(String.valueOf(smokedToday));
         setColorNorm(availableForTodayValue);
         setColorNorm(smokedForTodayValue);
+        if (newDayCheckBox.isChecked() && smokedToday != 0){
+            daysSmoked++;
+            percents();
+            smokedToday = 0;
+        }
+        smokedToday = 0;
+        smokedForTodayValue.setText(String.valueOf(smokedToday));
+    }
+
+    public void statisticsClicked (){
+        saveValue();
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
+    }
+
+    public void setupClicked (){
+        Intent intent = new Intent(this, SetupActivity.class);
+        startActivity(intent);
     }
 
     public void onClick(View v){
             switch (v.getId()){
-                case R.id.PlusB:
-                    plusClicked ();
-                    break;
-                case R.id.MinusB:
-                    minusClicked ();
-                    break;
-                case R.id.FreezeButton:
-                    freezeClicked();
-                    break;
-                case R.id.UnFreezeButton:
-                    unfreezeClicked();
-                    break;
                 case R.id.SmokeButton:
                     smokeClicked();
                     break;
@@ -227,17 +192,29 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 case R.id.AboutButton:
                     aboutClicked();
                     break;
+                case R.id.StatButton:
+                    statisticsClicked();
+                    break;
+                case R.id.SetupButton:
+                    setupClicked();
+                    break;
             }
     }
+
+    public void percents (){
+        percentNorm = setupnorm*100/smokedToday;
+        averagePercent = (averagePercent + percentNorm)/daysSmoked;
+    }
+
     public void saveTimer (){
-        savePref = getPreferences(MODE_PRIVATE);
+        savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
         editor = savePref.edit();
         editor.putLong(SAVE_TIME, Calendar.getInstance().getTimeInMillis());
         editor.apply();
     }
 
     public void loadTimer (){
-        savePref = getPreferences(MODE_PRIVATE);
+        savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
         prevTime = savePref.getLong(SAVE_TIME, 0);
         if (prevTime != 0){
             baseTime = prevTime - Calendar.getInstance().getTimeInMillis() + SystemClock.elapsedRealtime();
@@ -247,22 +224,38 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void saveValue (){
-        savePref = getPreferences(MODE_PRIVATE);
+        savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
         editor = savePref.edit();
-        editor.putInt(SAVE_NORM, norm);
         editor.putInt(SAVE_SMOKED, smokedToday);
         editor.putInt(SAVE_AVAILABLE, availableToday);
+        editor.putInt(SAVE_AllSMOKED, allSmoked);
+        editor.putFloat(SAVE_MONEYSPENT, moneySpent);
+        editor.putFloat(SAVE_PERCENT, averagePercent);
+        editor.putInt(SAVE_DAYSSMOKED, daysSmoked);
+        editor.putFloat(SAVE_ALLNICOTINE, allnicotine);
+        editor.putInt(SAVE_ALLTAR, alltar);
         editor.apply();
     }
 
     public void loadValue () {
-        savePref = getPreferences(MODE_PRIVATE);
-        norm = savePref.getInt(SAVE_NORM,0);
+        savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
+        setupnorm = savePref.getInt(SAVE_NORM,0);
         smokedToday = savePref.getInt(SAVE_SMOKED,0);
         availableToday = savePref.getInt(SAVE_AVAILABLE,0);
-        normPerDayValue.setText(String.valueOf(norm));
         availableForTodayValue.setText(String.valueOf(availableToday));
         smokedForTodayValue.setText(String.valueOf(smokedToday));
+        flag = savePref.getInt(SAVE_FLAG,0);
+        allSmoked = savePref.getInt(SAVE_AllSMOKED,0);
+        grn = (float) savePref.getInt(SAVE_PRICEG,0);
+        cent = (float) savePref.getInt(SAVE_PRICEC,0);
+        price = (grn + (cent/100))/20;
+        moneySpent = savePref.getFloat(SAVE_MONEYSPENT,0);
+        averagePercent = savePref.getFloat(SAVE_PERCENT,0);
+        daysSmoked = savePref.getInt(SAVE_DAYSSMOKED,0);
+        nicotineGained = savePref.getFloat(SAVE_NICOTINE,0);
+        tarGained = savePref.getInt(SAVE_TAR,0);
+        allnicotine = savePref.getFloat(SAVE_ALLNICOTINE,0);
+        alltar = savePref.getInt(SAVE_ALLTAR,0);
         colorCondit();
     }
 
