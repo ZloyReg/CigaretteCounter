@@ -79,6 +79,12 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         savePref = getSharedPreferences("CigarettePref",MODE_PRIVATE);
         statSmoked = String.valueOf(savePref.getInt(SAVE_AllSMOKED,0));
         statPercent = String.valueOf(percentformat.format(savePref.getFloat(SAVE_PERCENT,0)));
+        if (Float.valueOf(statPercent) >= 100) {
+            averageNormDispValue.setTextColor(getResources().getColor(R.color.colorAvailableBad));
+        }
+        else {
+            averageNormDispValue.setTextColor(getResources().getColor(R.color.colorAvailableNorm));
+        }
         statMoney = String.valueOf(percentformat.format(savePref.getFloat(SAVE_MONEYSPENT,0)));
         statNic = String.valueOf(percentformat.format(savePref.getFloat(SAVE_ALLNICOTINE,0)));
         statTar = String.valueOf(savePref.getInt(SAVE_ALLTAR,0));

@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         availableForTodayValue.setText(String.valueOf(availableToday));
         setColorNorm(availableForTodayValue);
         setColorNorm(smokedForTodayValue);
-        if (newDayCheckBox.isChecked() && smokedToday != 0){
+        if (newDayCheckBox.isChecked()){
             daysSmoked++;
             percents();
             smokedToday = 0;
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     public void percents (){
-        percentNorm = setupnorm*100/smokedToday;
+        percentNorm = smokedToday*100/setupnorm;
         averagePercent = (averagePercent + percentNorm)/daysSmoked;
     }
 
